@@ -27,12 +27,19 @@ public class Train {
     return route.contains(startStation) && route.contains(endStation) && isStartBeforeEnd(startStation, endStation);
   }
 
+  public int getStopsBetweenStations(Station startStation, Station endStation) {
+    if (!isRouteSupported(startStation, endStation)) {
+      throw new IllegalArgumentException("Invalid route for the train.");
+    }
+    return route.indexOf(endStation) - route.indexOf(startStation);
+  }
+
   private boolean isStartBeforeEnd(Station startStation, Station endStation) {
     boolean isFirstAhead = false;
-    for( Station station: route ) {
-      if (!isFirstAhead && station.equals( endStation )) {
+    for (Station station : route) {
+      if (!isFirstAhead && station.equals(endStation)) {
         return false;
-      } else if (station.equals( startStation )) {
+      } else if (station.equals(startStation)) {
         isFirstAhead = true;
       }
     }

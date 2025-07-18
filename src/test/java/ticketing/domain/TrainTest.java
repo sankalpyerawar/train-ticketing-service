@@ -39,43 +39,64 @@ class TrainTest {
   }
 
   @Test
-  void shouldReturnTrueIfRouteIsSupportedByTrain(){
+  void shouldReturnTrueIfRouteIsSupportedByTrain() {
     String trainNumber = "12345";
     Station startStation = new Station("Karjat");
-    Station endStation =  new Station("Chinchwad");
+    Station endStation = new Station("Chinchwad");
 
     Train mumbaiToPuneTrain = mumbaiToPuneTrain(trainNumber);
     assertTrue(mumbaiToPuneTrain.isRouteSupported(startStation, endStation));
   }
 
   @Test
-  void shouldReturnFalseIfStartStationIsNotSupportedByTrain(){
+  void shouldReturnFalseIfStartStationIsNotSupportedByTrain() {
     String trainNumber = "12345";
     Station startStation = new Station("Delhi");
-    Station endStation =  new Station("Chinchwad");
+    Station endStation = new Station("Chinchwad");
 
     Train mumbaiToPuneTrain = mumbaiToPuneTrain(trainNumber);
     assertFalse(mumbaiToPuneTrain.isRouteSupported(startStation, endStation));
   }
 
   @Test
-  void shouldReturnFalseIfEndStationIsNotSupportedByTrain(){
+  void shouldReturnFalseIfEndStationIsNotSupportedByTrain() {
     String trainNumber = "12345";
     Station startStation = new Station("Karjat");
-    Station endStation =  new Station("Delhi");
+    Station endStation = new Station("Delhi");
 
     Train mumbaiToPuneTrain = mumbaiToPuneTrain(trainNumber);
     assertFalse(mumbaiToPuneTrain.isRouteSupported(startStation, endStation));
   }
 
   @Test
-  void shouldReturnFalseIfStartStationComesAfterEndStationOnTrainRoute(){
+  void shouldReturnFalseIfStartStationComesAfterEndStationOnTrainRoute() {
     String trainNumber = "12345";
     Station startStation = new Station("Chinchwad");
-    Station endStation =  new Station("Karjat");
+    Station endStation = new Station("Karjat");
 
     Train mumbaiToPuneTrain = mumbaiToPuneTrain(trainNumber);
     assertFalse(mumbaiToPuneTrain.isRouteSupported(startStation, endStation));
+  }
+
+  @Test
+  void shouldReturnStopsBetweenStationForValidRoute() {
+    String trainNumber = "12345";
+    Station startStation = new Station("Karjat");
+    Station endStation = new Station("Chinchwad");
+
+    Train mumbaiToPuneTrain = mumbaiToPuneTrain(trainNumber);
+    assertEquals(2, mumbaiToPuneTrain.getStopsBetweenStations(startStation, endStation));
+  }
+
+  @Test
+  void shouldThrowExceptionIfRouteIsInvalid() {
+    String trainNumber = "12345";
+    Station startStation = new Station("Chinchwad");
+    Station endStation = new Station("Karjat");
+
+    Train mumbaiToPuneTrain = mumbaiToPuneTrain(trainNumber);
+    assertThrows(IllegalArgumentException.class, () -> mumbaiToPuneTrain.getStopsBetweenStations(startStation, endStation)
+    );
   }
 
   private static Train mumbaiToPuneTrain(String trainNumber) {
