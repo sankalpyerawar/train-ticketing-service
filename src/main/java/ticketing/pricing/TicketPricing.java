@@ -1,4 +1,4 @@
-package pricing;
+package ticketing.pricing;
 
 import ticketing.domain.CoachType;
 

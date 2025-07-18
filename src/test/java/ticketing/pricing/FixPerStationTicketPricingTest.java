@@ -1,4 +1,4 @@
-package pricing;
+package ticketing.pricing;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
